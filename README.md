@@ -38,4 +38,7 @@ menggunakan @RequestParam atau @PathVariable?
 **Jawab**
 @RequestParam untuk parameter query GET seperti "is-palindrome?kalimat=isi" yang mengekstrak nilai string query yang berguna untuk sorting, filtering, dan sebagainya. Sedangkan @PathVariable untuk mendapatkan objek individual seperti "is-palindrome/isi" disini kita mendapatkan parameter isi sebagai objek individual. Sebaiknya kita memakai @RequestParam untuk melakukan sorting ataupun filtering sedangkan untuk mengambil 1 objek seperti id disarankan menggunakan @PathVariable
 
+### What I did not understand
+Kenapa kita menggunakan Java Spring Framework?
+
 
