@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Bioskop</title>
+</head>
+<body>
+<h2 th:text="'Bioskop dengan id bioskop ' + ${idBioskop} + ' berhasil ditambahkan'"></h2>
+<a th:href="@{'/bioskop/view/id-bioskop/' + ${idBioskop}}">Lihat Detail</a>
+<a href="/bioskop/viewall">Kembali</a>
+</body>
+</html>
