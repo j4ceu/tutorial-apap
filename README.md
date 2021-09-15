@@ -41,4 +41,45 @@ menggunakan @RequestParam atau @PathVariable?
 ### What I did not understand
 Kenapa kita menggunakan Java Spring Framework?
 
+## Tutorial 2
+### What I have learned today
+Pada Tutorial 2 saya belajar membuat service dan CRUD pada Spring Boot.
+
+### Pertanyaan
+1. Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link berikut: http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx&jumlahStudio=10 
+Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi
+**Jawab**
+Akan terjadi Whitelabel error page saat membuka link tersebut. Hal itu dikarenakan view yang di return pada Controller belum dibuat.
+
+2. Menurut kamu anotasi @Autowired pada class Controller tersebut
+merupakan implementasi dari konsep apa? Dan jelaskan secara singkat cara kerja
+@Autowired tersebut dalam konteks service dan controller yang telah kamu buat
+**Jawab**
+Autowired merupakan implementasi dari konsep Dependency Injection. Dengan menggunakan autowired seperti pada Lab ini yaitu "private BioskopService bioskopService;" sehingga kita dapat mengakses constructors yang berada di service di controller.
+
+3. Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link
+berikut: http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx Apa yang terjadi? Jelaskan
+mengapa hal tersebut dapat terjadi.
+**Jawab**
+Akan terjadi error dikarenakan parameter pada link tersebut kurang. Parameter tersebut yaitu Jumlah Studio.
+
+4. Jika Papa APAP ingin melihat Bioskop dengan nama Bioskop Maung, link apa yang harus diakses?
+**Jawab**
+Sebelumnya kita harus mengetahui id dari Bioskop yang memiliki nama Bioskop Maung, id tersebut dapat dilihat pada http://localhost:8080/bioskop/viewall. Misalnya Bioskop Maung mempunyai id = 1, kita dapat melihat detail dari Bioskop Maung dengan mengakses http://localhost:8080/bioskop/view/id-bioskop/1 (Latihan) atau http://localhost:8080/bioskop/view?idBioskop=1
+
+5. Tambahkan 1 contoh Bioskop lainnya sesukamu. Lalu cobalah untuk mengakses http://localhost:8080/bioskop/viewall , apa yang akan ditampilkan? Sertakan
+juga bukti screenshotmu.
+**Jawab**
+![image](https://user-images.githubusercontent.com/71779362/133429376-e2f861cf-1203-4f39-851b-e50758bec684.png)
+
+### What I did not understand
+Saat mengerjakan latihan saya ingin menggunakan update dengan menggunakan textbox, tetapi saya tidak mengerti bagaimana passing parameter dari value textbox ke href url.
+
+
+
+
+
+
+
+
 
