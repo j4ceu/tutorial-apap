@@ -7,7 +7,15 @@ import java.util.List;
 public interface BioskopService {
     void addBioskop(BioskopModel bioskop);
 
+    void updateBioskop(BioskopModel bioskop);
+
+    void deleteBioskop(BioskopModel bioskop);
+
     List<BioskopModel> getBioskopList();
 
-    BioskopModel getBioskopByIdBioskop(String idBioskop);
+    BioskopModel getBioskopByNoBioskop(Long noBioskop);
+
+    boolean cekWaktuBuka (BioskopModel bioskop);
+
+
 }
