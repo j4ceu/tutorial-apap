@@ -77,7 +77,7 @@ public class BioskopController {
             return "view-bioskop";
         } else {
             model.addAttribute("noBioskop", noBioskop);
-            return "notFoundId";
+            return "notFoundNoBioskop";
         }
     }
 
@@ -109,24 +109,29 @@ public class BioskopController {
 
         BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
 
-        boolean buka = bioskopService.cekWaktuBuka(bioskop);
+        if (bioskop != null) {
 
-        // Cek Penjaga
-        boolean tidakAdaPenjaga = bioskop.getListPenjaga().isEmpty();
+            boolean buka = bioskopService.cekWaktuBuka(bioskop);
 
-        // Delete Mode
-        boolean delete = true;
+            // Cek Penjaga
+            boolean tidakAdaPenjaga = bioskop.getListPenjaga().isEmpty();
 
-        if (buka == false && tidakAdaPenjaga == true) {
-            bioskopService.deleteBioskop(bioskop);
-            model.addAttribute("noBioskop", noBioskop);
-            return "deleteSuccess";
+            // Delete Mode
+            boolean delete = true;
 
+            if (buka == false && tidakAdaPenjaga == true) {
+                bioskopService.deleteBioskop(bioskop);
+                model.addAttribute("noBioskop", noBioskop);
+                return "deleteSuccess";
+
+            } else {
+                model.addAttribute("noBioskop", noBioskop);
+                return "cantDeleteBioskop";
+            }
         } else {
             model.addAttribute("noBioskop", noBioskop);
-            return "cantDeleteBioskop";
+            return "notFoundNoBioskop";
         }
-
 
     }
 

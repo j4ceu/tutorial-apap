@@ -56,8 +56,13 @@ public class PenjagaController {
     ) {
 
         PenjagaModel penjaga = penjagaService.getPenjagaByNoPenjaga(noPenjaga);
-        model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
-        model.addAttribute("penjaga", penjaga);
+        if (penjaga != null) {
+            model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
+            model.addAttribute("penjaga", penjaga);
+        } else {
+            model.addAttribute("noPenjaga", noPenjaga);
+            return "notFoundNoPenjaga";
+        }
         return "form-update-penjaga";
     }
 
@@ -89,15 +94,21 @@ public class PenjagaController {
     ) {
 
         PenjagaModel penjaga = penjagaService.getPenjagaByNoPenjaga(noPenjaga);
-        boolean buka = bioskopService.cekWaktuBuka(penjaga.getBioskop());
-        if (buka){
-            model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
-            return "bioskopBuka";
+        if (penjaga != null){
+
+            boolean buka = bioskopService.cekWaktuBuka(penjaga.getBioskop());
+            if (buka){
+                model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
+                return "bioskopBuka";
+            } else {
+                penjagaService.deletePenjaga(penjaga);
+                model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
+                model.addAttribute("penjaga", penjaga);
+                return "deletePenjagaSucces";
+            }
         } else {
-            penjagaService.deletePenjaga(penjaga);
-            model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
-            model.addAttribute("penjaga", penjaga);
-            return "deletePenjagaSucces";
+            model.addAttribute("noPenjaga", noPenjaga);
+            return "notFoundNoPenjaga";
         }
     }
 
