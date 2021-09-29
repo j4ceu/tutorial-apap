@@ -2,6 +2,81 @@
 ## Authors
 Sutan Raihan Maulaya - 1906305820 - C
 
+## Tutorial 3
+### What I have learned today
+Pada Tutorial 3 saya belajar tentang JPA pada Spring boot dan melakukan CRUD yang terkoneksi dengan Database MySql.
+
+### Pertanyaan
+1. Tolong jelaskan secara singkat apa kegunaan dari anotasi-anotasi yang ada pada model
+(@AllArgsConstructor, @NoArgsConstructor, @Setter, @Getter, @Entity, @Table)\
+**Jawab**
+- **AllArgsConstructor**, adalah anotasi untuk mengenerate konstruktor dengan 1 parameter dari setiap atribut yang ada pada kelas.
+- **@NoArgsConstructor**, adalah anotasi untuk mengenerate konstruktor tanpa parameter,
+- **@Setter dan @Getter**, adalah anotasi untuk membuat method setter dan getter default secara otomatis pada setiap atribut yang ada pada kelas.
+- **@Entity**, adalah anotasi yang menandakan suatu class tersebut merupakan entitas JPA.
+- **@Table**, adalah anotasi untuk membuat table pada SQL
+
+2. Pada class BioskopDB, terdapat method findByNoBioskop, apakah kegunaan dari method
+tersebut?\
+**Jawab**\
+method findByNoBioskop merupakan methode untuk mencari bioskop berdasarkan no Bioskopnya dan mereturn suatu object bioskop.
+
+3. Jelaskan perbedaan kegunaan dari anotasi @JoinTable dan @JoinColumn.\
+**Jawab**\
+@JoinTable akan menyimpan id dari kedua table ke dalam table terpisah sedangkan @JoinColum akan menyimpan id dari table lain di kolom baru.
+
+4. Pada class PenjagaModel, digunakan anotasi @JoinColumn pada atribut bioskop, apa
+kegunaan dari name, referencedColumnName, dan nullable dalam anotasi tersebut? dan apa
+perbedaan nullable dan penggunaan anotasi @NotNul\
+**Jawab**
+- Kegunaan dari **name** adalah membuat nama kolom atau table pada database sesuai dengan **name**
+- Kegunaan dari **referencedColumnName** adalah menentukan kolom yang di rujuk yang menjadi foreign key. Pada PenjagaModel yaitu membuat kolom no_bioskop dengan referensi dari model Bioskop dengan nama kolom noBioskop
+- Kegunaan dari **nullable** adalah membuat kolom tersebut dapat berisi null. 
+- Perbedaan dari **nullable** dengan **@NotNull** yaitu @NotNull merupakan anotasi yang terkait dengan Java. Java akan mengeluarkan exception ketika attribute tersebut belum di set, sedangkan nullable merupakan bagian dari @Column dan membuat kolom tersebut tidak menjadi null yang merupakan constraint dari database. Maka dari itu dengan menggunakan nullable tidak akan terjadi eror jika data belum dikirim ke database.
+
+5. Jelaskan kegunaan FetchType.LAZY, CascadeType.ALL, dan FetchType.EAGER\
+**Jawab**
+- FetchType.LAZY akan melakukan load data namun tidak akan melakukan load semua collection object/child saat object parent di fetch
+- FetchType.EAGER akan melakukan load semua collection/child sesaat setelah object parent di fetch
+- CascadeType.ALL akan melakukan semua operasi tanpa memperdulikan constraint yang diperintahkan
+
+### What I did not understand
+Kurang paham dengan mempassing suatu object dari front end ke back end pad SpringBoot
+
+## Tutorial 2
+### What I have learned today
+Pada Tutorial 2 saya belajar membuat service dan CRUD pada Spring Boot.
+
+### Pertanyaan
+1. Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link berikut: http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx&jumlahStudio=10 
+Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi
+**Jawab**
+Akan terjadi Whitelabel error page saat membuka link tersebut. Hal itu dikarenakan view yang di return pada Controller belum dibuat.
+
+2. Menurut kamu anotasi @Autowired pada class Controller tersebut
+merupakan implementasi dari konsep apa? Dan jelaskan secara singkat cara kerja
+@Autowired tersebut dalam konteks service dan controller yang telah kamu buat
+**Jawab**
+Autowired merupakan implementasi dari konsep Dependency Injection. Dengan menggunakan autowired seperti pada Lab ini yaitu "private BioskopService bioskopService;" sehingga kita dapat mengakses constructors yang berada di service di controller.
+
+3. Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link
+berikut: http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx Apa yang terjadi? Jelaskan
+mengapa hal tersebut dapat terjadi.
+**Jawab**
+Akan terjadi error dikarenakan parameter pada link tersebut kurang. Parameter tersebut yaitu Jumlah Studio.
+
+4. Jika Papa APAP ingin melihat Bioskop dengan nama Bioskop Maung, link apa yang harus diakses?
+**Jawab**
+Sebelumnya kita harus mengetahui id dari Bioskop yang memiliki nama Bioskop Maung, id tersebut dapat dilihat pada http://localhost:8080/bioskop/viewall. Misalnya Bioskop Maung mempunyai id = 1, kita dapat melihat detail dari Bioskop Maung dengan mengakses http://localhost:8080/bioskop/view/id-bioskop/1 (Latihan) atau http://localhost:8080/bioskop/view?idBioskop=1
+
+5. Tambahkan 1 contoh Bioskop lainnya sesukamu. Lalu cobalah untuk mengakses http://localhost:8080/bioskop/viewall , apa yang akan ditampilkan? Sertakan
+juga bukti screenshotmu.
+**Jawab**
+![image](https://user-images.githubusercontent.com/71779362/133429376-e2f861cf-1203-4f39-851b-e50758bec684.png)
+
+### What I did not understand
+Saat mengerjakan latihan saya ingin menggunakan update dengan menggunakan textbox, tetapi saya tidak mengerti bagaimana passing parameter dari value textbox ke href url.
+
 ## Tutorial 1
 ### What I have learned today
 Pada Tutorial 1 saya belajar tentang dunia pergit-tan dan java spring boot.
@@ -41,39 +116,7 @@ menggunakan @RequestParam atau @PathVariable?
 ### What I did not understand
 Kenapa kita menggunakan Java Spring Framework?
 
-## Tutorial 2
-### What I have learned today
-Pada Tutorial 2 saya belajar membuat service dan CRUD pada Spring Boot.
 
-### Pertanyaan
-1. Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link berikut: http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx&jumlahStudio=10 
-Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi
-**Jawab**
-Akan terjadi Whitelabel error page saat membuka link tersebut. Hal itu dikarenakan view yang di return pada Controller belum dibuat.
-
-2. Menurut kamu anotasi @Autowired pada class Controller tersebut
-merupakan implementasi dari konsep apa? Dan jelaskan secara singkat cara kerja
-@Autowired tersebut dalam konteks service dan controller yang telah kamu buat
-**Jawab**
-Autowired merupakan implementasi dari konsep Dependency Injection. Dengan menggunakan autowired seperti pada Lab ini yaitu "private BioskopService bioskopService;" sehingga kita dapat mengakses constructors yang berada di service di controller.
-
-3. Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link
-berikut: http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx Apa yang terjadi? Jelaskan
-mengapa hal tersebut dapat terjadi.
-**Jawab**
-Akan terjadi error dikarenakan parameter pada link tersebut kurang. Parameter tersebut yaitu Jumlah Studio.
-
-4. Jika Papa APAP ingin melihat Bioskop dengan nama Bioskop Maung, link apa yang harus diakses?
-**Jawab**
-Sebelumnya kita harus mengetahui id dari Bioskop yang memiliki nama Bioskop Maung, id tersebut dapat dilihat pada http://localhost:8080/bioskop/viewall. Misalnya Bioskop Maung mempunyai id = 1, kita dapat melihat detail dari Bioskop Maung dengan mengakses http://localhost:8080/bioskop/view/id-bioskop/1 (Latihan) atau http://localhost:8080/bioskop/view?idBioskop=1
-
-5. Tambahkan 1 contoh Bioskop lainnya sesukamu. Lalu cobalah untuk mengakses http://localhost:8080/bioskop/viewall , apa yang akan ditampilkan? Sertakan
-juga bukti screenshotmu.
-**Jawab**
-![image](https://user-images.githubusercontent.com/71779362/133429376-e2f861cf-1203-4f39-851b-e50758bec684.png)
-
-### What I did not understand
-Saat mengerjakan latihan saya ingin menggunakan update dengan menggunakan textbox, tetapi saya tidak mengerti bagaimana passing parameter dari value textbox ke href url.
 
 
 
