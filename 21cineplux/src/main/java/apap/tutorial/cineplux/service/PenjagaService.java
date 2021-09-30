@@ -10,5 +10,7 @@ public interface PenjagaService {
 
     void deletePenjaga(PenjagaModel penjaga);
 
+    int deletePenjagaNew(PenjagaModel penjaga);
+
     PenjagaModel getPenjagaByNoPenjaga(Long noPenjaga);
 }
