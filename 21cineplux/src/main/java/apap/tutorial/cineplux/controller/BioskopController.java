@@ -42,7 +42,7 @@ int counter = 0;
             @RequestParam(name = "film_bioskop", required = false) Long filmBioskop,
             Model model) {
         counter++;
-        System.out.println(counter);
+
         List<FilmModel> listFilm = filmService.getListFilm();
 
 
@@ -74,7 +74,7 @@ int counter = 0;
             @RequestParam(name = "film_bioskop", required = false) Long filmBioskop,
             Model model) {
         counter--;
-        System.out.println(counter);
+
         List<FilmModel> listFilm = filmService.getListFilm();
 
 
@@ -106,8 +106,10 @@ int counter = 0;
             @ModelAttribute BioskopModel bioskop,
             Model model
     ) {
+        System.out.println(bioskop.getListFilm());
 
         bioskopService.addBioskop(bioskop);
+        counter = 0;
 
         model.addAttribute("noBioskop", bioskop.getNamaBioskop());
         return "add-bioskop";
