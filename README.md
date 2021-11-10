@@ -2,6 +2,32 @@
 ## Authors
 Sutan Raihan Maulaya - 1906305820 - C
 
+## Tutorial 5
+### What I have learned today
+Pada Tutorial 5 saya belajar tentang bagaimana menggunakan rest API pada Spring boot dan membuat mock server. Selain itu, saya juga belajar tentang penggunaan Postman.
+
+### Pertanyaan
+1. Apa itu Postman? Apa kegunaannya?\
+**Jawab**\
+Postman adalah sebuah aplikasi yang berfungsi sebagai REST Client untuk uji coba REST API. Kegunaan dari Postman yaitu sebagai tools untuk menguji API yang developer buat. Pada Postman memiliki beberapa fitur salah satunya pada tutorial ini menggunakan Collection, Environments, dan Mock Server. Collection merupakan folder pengelompokan request API yang disimpan. Environments merupakan semacam config untuk menyimpan atribute. Mock Server merupakan untuk membuat server API yang dapat diakses oleh internet.
+
+2. Jelaskan fungsi dari anotasi @JsonIgnoreProperties dan @JsonProperty.\
+  **Jawab**
+  - @JsonIgnoreProperties : Digunakan dalam tingkat kelas untuk menandai properi atau daftar properti yang akan diabaikan
+  - @JsonProperty : Digunakan untuk melakukan serialize atau deserialize nama properti saat kita berurusan dengan getter dan setter non-standar
+  
+3. Apa kegunaan WebClient?\
+ **Jawab**\
+ WebClient merupakan interface yang mewakili entry point utama untuk melakukan web request. WebClient merupakan bagian dari modul Spring Web Reactive, dan akan menggantikan Rest Template. Kegunaan webclient untuk melakukan non-blocking, reactive client untuk melakukan permintaan HTTP, dan sebagainya.
+ 
+ 4. Apa itu ResponseEntity dan BindingResult? Apa kegunaannya?\
+ **Jawab**\
+ResponseEntity berguna untuk mewakili seluruh respons HTTP seperti, status code, headers, dan body. Maka dari itu kita dapat menggunakannya untuk mengikonfigurasi response HTTP secara keseluruhan.
+BindingResult menyimpan hasil validasi dan binding dan berisi kesalahan yang mungkin dapat terjadi dan jika terjadi kesalahan akan mereturn exception.
+
+### What I did not understand
+Pada tutorial ini sepertinya saya cukup paham tentang lab ini.
+
 ## Tutorial 4
 ### What I have learned today
 Pada Tutorial 4 saya belajar tentang penggunaan file static, fragment, error handling, dan form handler pada spring boot.
