@@ -88,24 +88,30 @@ public class PenjagaRestServiceImpl implements PenjagaRestService {
 
     @Override
     public PenjagaModel getUmur(Long noPenjaga){
+        LocalTime now = LocalTime.now();
         PenjagaModel penjaga = getPenjagaByNoPenjaga(noPenjaga);
-        String namaPenjaga = penjaga.getNamaPenjaga();
-        String[] firstName = namaPenjaga.split(" ");
+        BioskopModel bioskop = bioskopDB.findByNoBioskop(penjaga.getBioskop().getNoBioskop()).get();
+        if((now.isBefore(bioskop.getWaktuBuka()) || now.isAfter(bioskop.getWaktuTutup()))) {
+            String namaPenjaga = penjaga.getNamaPenjaga();
+            String[] firstName = namaPenjaga.split(" ");
 
-        String getStringApi = this.webClient.get().uri("/?name=" + firstName[0])
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
+            String getStringApi = this.webClient.get().uri("/?name=" + firstName[0])
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
 
-        getStringApi = getStringApi.replace("{", "");
-        getStringApi = getStringApi.replace("}", "");
+            getStringApi = getStringApi.replace("{", "");
+            getStringApi = getStringApi.replace("}", "");
 
-        String[] splitStringApi = getStringApi.split(",");
-        String[] getAge = splitStringApi[1].split(":");
-        System.out.println(getAge[1]);
-        penjaga.setUmur(getAge[1]);
+            String[] splitStringApi = getStringApi.split(",");
+            String[] getAge = splitStringApi[1].split(":");
+            penjaga.setUmur(getAge[1]);
 
-        return penjagaDB.save(penjaga);
+            return penjagaDB.save(penjaga);
+        } else {
+            throw new UnsupportedOperationException("Bioskop is still open!");
+        }
+
 
 
 

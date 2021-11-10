@@ -84,7 +84,16 @@ public class PenjagaRestController {
 
     @GetMapping(value="penjaga/umur/{noPenjaga}")
     private PenjagaModel getStatus(@PathVariable("noPenjaga") Long noPenjaga){
-        return penjagaRestService.getUmur(noPenjaga);
+        try {
+            return penjagaRestService.getUmur(noPenjaga);
+        }catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Penjaga with No Penjaga " + String.valueOf(noPenjaga) + " Not Found.");
+        }catch (UnsupportedOperationException e){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Bioskop is still open!"
+            );
+        }
+
     }
 
 
