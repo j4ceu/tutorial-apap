@@ -1,6 +1,7 @@
 package apap.tutorial.cineplux.service;
 
 import apap.tutorial.cineplux.model.BioskopModel;
+import apap.tutorial.cineplux.model.FilmModel;
 import apap.tutorial.cineplux.repository.BioskopDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -8,12 +9,14 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.List;
 
 @Service
 @Transactional
 public class BioskopServiceImpl implements BioskopService {
+    ArrayList<FilmModel> listFilm = new ArrayList<FilmModel>();
     @Autowired
     BioskopDB bioskopDB;
 
@@ -35,6 +38,22 @@ public class BioskopServiceImpl implements BioskopService {
     @Override
     public List<BioskopModel> getBioskopList(){
         return bioskopDB.findAll(Sort.by("namaBioskop").ascending());
+    }
+
+    @Override
+    public List<FilmModel> filmListTemp(FilmModel film){
+        listFilm.add(film);
+        return listFilm;
+    }
+
+    @Override
+    public List<FilmModel> getFilmListTemp(){
+        return listFilm;
+    }
+
+    @Override
+    public void clearFilmListTemp() {
+        listFilm.clear();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package apap.tutorial.cineplux.service;
 
 import apap.tutorial.cineplux.model.BioskopModel;
+import apap.tutorial.cineplux.model.FilmModel;
 
 import java.util.List;
 
@@ -16,6 +17,12 @@ public interface BioskopService {
     BioskopModel getBioskopByNoBioskop(Long noBioskop);
 
     boolean cekWaktuBuka (BioskopModel bioskop);
+
+    List<FilmModel> filmListTemp(FilmModel film);
+
+    List<FilmModel> getFilmListTemp();
+
+    void clearFilmListTemp();
 
 
 }

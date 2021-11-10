@@ -1,8 +1,10 @@
 package apap.tutorial.cineplux.controller;
 
 import apap.tutorial.cineplux.model.BioskopModel;
+import apap.tutorial.cineplux.model.FilmModel;
 import apap.tutorial.cineplux.model.PenjagaModel;
 import apap.tutorial.cineplux.service.BioskopService;
+import apap.tutorial.cineplux.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,23 +16,101 @@ import java.util.List;
 
 @Controller
 public class BioskopController {
+int counter = 0;
 
     @Qualifier("bioskopServiceImpl")
     @Autowired
     private BioskopService bioskopService;
 
+    @Qualifier("filmServiceImpl")
+    @Autowired
+    FilmService filmService;
+
+
     @GetMapping("/bioskop/add")
     public String addBioskop(Model model) {
+        List<FilmModel> listFilm = filmService.getListFilm();
         model.addAttribute("bioskop", new BioskopModel());
+        model.addAttribute("listFilm", listFilm);
+
         return "form-add-bioskop";
     }
 
-    @PostMapping("/bioskop/add")
+    @RequestMapping(value = "/bioskop/add", method = RequestMethod.POST , params="addfilm")
+    public String addBioskopTemp(
+            @ModelAttribute BioskopModel bioskop,
+            @RequestParam(name = "film_bioskop", required = false) Long filmBioskop,
+            Model model) {
+        counter++;
+
+        List<FilmModel> listFilm = filmService.getListFilm();
+
+
+
+
+        if(filmBioskop != null){
+        bioskopService.filmListTemp(filmService.getFilmByNoFilm(filmBioskop));
+        }
+
+        List<FilmModel> filmTemp = bioskopService.getFilmListTemp();
+        if(filmTemp.size() != 0 ){
+            model.addAttribute("filmTemp", filmTemp);
+        }
+
+
+        model.addAttribute("adaFilm", true);
+        model.addAttribute("bioskop", bioskop);
+        model.addAttribute("listFilm", listFilm);
+        model.addAttribute("counter", counter);
+
+
+
+        return "form-add-bioskop";
+    }
+
+    @RequestMapping(value = "/bioskop/add", method = RequestMethod.POST , params="deletefilm")
+    public String addBioskopTempDelete(
+            @ModelAttribute BioskopModel bioskop,
+            @RequestParam(name = "film_bioskop", required = false) Long filmBioskop,
+            Model model) {
+        counter--;
+
+        List<FilmModel> listFilm = filmService.getListFilm();
+
+
+
+
+
+        List<FilmModel> filmTemp = bioskopService.getFilmListTemp();
+        if(filmTemp.size() != 0 ){
+            model.addAttribute("filmTemp", filmTemp);
+        }
+
+        if( counter <= 0) {
+            model.addAttribute("adaFilm", false);
+        } else {
+            model.addAttribute("adaFilm", true);
+        }
+
+        model.addAttribute("bioskop", bioskop);
+        model.addAttribute("listFilm", listFilm);
+        model.addAttribute("counter", counter);
+
+
+
+        return "form-add-bioskop";
+    }
+
+    @RequestMapping(value = "/bioskop/add", method = RequestMethod.POST , params="add")
     public String addBioskopSubmit(
             @ModelAttribute BioskopModel bioskop,
             Model model
     ) {
+        System.out.println(bioskop.getListFilm());
+
         bioskopService.addBioskop(bioskop);
+        counter = 0;
+
         model.addAttribute("noBioskop", bioskop.getNamaBioskop());
         return "add-bioskop";
     }
@@ -51,6 +131,7 @@ public class BioskopController {
 
 
         if (bioskop != null) {
+            List<FilmModel> listFilm = bioskop.getListFilm();
             List<PenjagaModel> listPenjaga = bioskop.getListPenjaga();
             // Button Update Keliatan Sesuai Jam
             LocalTime localTime = LocalTime.now();
@@ -71,6 +152,7 @@ public class BioskopController {
 
             model.addAttribute("bioskop", bioskop);
             model.addAttribute("listPenjaga", listPenjaga);
+            model.addAttribute("listFilm", listFilm);
             model.addAttribute("buka", buka);
             model.addAttribute("delete", delete);
 
