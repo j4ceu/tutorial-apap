@@ -2,6 +2,27 @@
 ## Authors
 Sutan Raihan Maulaya - 1906305820 - C
 
+## Tutorial 4
+### What I have learned today
+Pada Tutorial 4 saya belajar tentang penggunaan file static, fragment, error handling, dan form handler pada spring boot.
+
+### Pertanyaan
+1. Jelaskan perbedaan th:include dan th:replace!\
+**Jawab**
+Untuk include sama seperti Django yaitu menyisipkan suatu konten ke dalam html, sedangkan untuk replace adalah menggantikan konten yang sudah ada dengan yang ada pada fragmen.
+
+2. Jelaskan apa fungsi dari th:object!\
+  **Jawab**
+  Untuk mengirimkan object dari form pada html dengan method post atau get, lalu akan diterima oleh controller dengan @ModelAtribute yang menerima atribute dari halaman frontend.
+  
+3. Jelaskan perbedaan dari * dan $ pada saat penggunaan th:object! Kapan harus dipakai?\
+ **Jawab**
+ - Pada th:object yang menggunakan $ merupakan variable expression yang mengintegrasikan Spring dengan Thymeleaf.
+ - Pada th:object yang menggunakan * merupakan selection expression yang akan mengexecute sesuai objek yang dipilih.
+
+### What I did not understand
+Saya tidak mengerti bagaimana cara melakukan binding di Springboot pada bagian select dan option pada Thymeleaf dengan Controller.
+
 ## Tutorial 3
 ### What I have learned today
 Pada Tutorial 3 saya belajar tentang JPA pada Spring boot dan melakukan CRUD yang terkoneksi dengan Database MySql.
