@@ -6,6 +6,8 @@ import apap.tutorial.cineplux.repository.BioskopDB;
 import apap.tutorial.cineplux.repository.PenjagaDB;
 import apap.tutorial.cineplux.rest.BioskopDetail;
 import apap.tutorial.cineplux.rest.Setting;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -15,6 +17,7 @@ import javax.transaction.NotSupportedException;
 import javax.transaction.Transactional;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -99,6 +102,9 @@ public class PenjagaRestServiceImpl implements PenjagaRestService {
                     .retrieve()
                     .bodyToMono(String.class)
                     .block();
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, String> map = mapper.readValue(getStringApi, Map.class);
+
 
             getStringApi = getStringApi.replace("{", "");
             getStringApi = getStringApi.replace("}", "");
@@ -111,10 +117,11 @@ public class PenjagaRestServiceImpl implements PenjagaRestService {
         } else {
             throw new UnsupportedOperationException("Bioskop is still open!");
         }
+    }
 
-
-
-
+    @Override
+    public List<PenjagaModel> retrievePenjagaListByJenisKelamin(Integer jenisKelamin) {
+        return penjagaDB.findAllByJenisKelamin(jenisKelamin);
     }
 
 

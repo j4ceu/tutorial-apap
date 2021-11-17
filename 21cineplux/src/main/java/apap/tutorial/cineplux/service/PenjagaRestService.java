@@ -12,5 +12,6 @@ public interface PenjagaRestService {
     PenjagaModel updatePenjaga(Long noPenjaga, PenjagaModel penjagaUpdate);
     void deletePenjaga(Long noPenjaga);
     PenjagaModel getUmur (Long noPenjaga);
+    List<PenjagaModel> retrievePenjagaListByJenisKelamin(Integer jenisKelamin);
 
 }
