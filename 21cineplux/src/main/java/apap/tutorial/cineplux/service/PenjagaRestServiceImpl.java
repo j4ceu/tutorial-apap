@@ -6,8 +6,6 @@ import apap.tutorial.cineplux.repository.BioskopDB;
 import apap.tutorial.cineplux.repository.PenjagaDB;
 import apap.tutorial.cineplux.rest.BioskopDetail;
 import apap.tutorial.cineplux.rest.Setting;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -102,9 +100,6 @@ public class PenjagaRestServiceImpl implements PenjagaRestService {
                     .retrieve()
                     .bodyToMono(String.class)
                     .block();
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String, String> map = mapper.readValue(getStringApi, Map.class);
-
 
             getStringApi = getStringApi.replace("{", "");
             getStringApi = getStringApi.replace("}", "");
