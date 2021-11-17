@@ -2,6 +2,39 @@
 ## Authors
 Sutan Raihan Maulaya - 1906305820 - C
 
+## Tutorial 6
+### What I have learned today
+Pada Tutorial 6 saya belajar tentang Security pada Springboot dan bagaimana membuat fitur Login dan Logout. Selain itu, saya belajar tentang bagaimana membuat user ke database dan cara melakukan encrypt pada sebuah data atau string.
+
+### Pertanyaan
+1. Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode
+yang telah anda buat) konsep tersebut diimplementasi?\
+**Jawab**
+- Otentikasi adalah proses identifikasi penguna apakah pengguna tersebut terdaftar pada database atau tidak. Proses identifikasi dilakukan dengan cara menyamakan username dan password yang dimasukkan dengan yang berada pada database. Konsep ini diimplementasi pada class WebSecurityConfig pada method configAuthentication
+- Otorisasi adalah proses menentukan apakah pengguna atau user saat ini diperbolehkan untuk melakukan suatu tugas tertentu atau tidak. Konsep ini diimplementasi pada class WebSecurityConfig pada method configure. Selain itu, konsep ini juga saya gunakan pada bagian Lihat Semua User dan melakukan akses pada pengguna, pada bagian melihat semua user dan melakukan add dan delete user hanya dapat dilakukan oleh user dengan role ADMIN dan yang dapat melakukan akses pada pengguna hanya user yang memiliki role Manager.
+
+2. Apa itu BCryptPasswordEncoder? Jelaskan secara singkat cara kerja dan tujuannya\
+  **Jawab**\
+  BCryptPasswordEncoder merupakan implementasi untuk melakukan enkripsi ataupun dekripsi pada sebuah password yang menggunakan algoritma bcrypt. BCryptPasswordEncoder memiliki tujuan untuk melakukan enkripsi sebuah password sehingga password tidak dapat dibaca pada database. Cara kerja dari BcryptPasswordEncoder yaitu secara otomatis menghasilkan dan menggunakan random salt untuk menghitung hash, sehingga setiap kali memanggil BCryptPasswordEncoder akan mendapatkan output yang berbeda.
+  
+3. Apakah penyimpanan password sebaiknya menggunakan encryption atau hashing? Mengapa
+demikian?\
+ **Jawab**
+ - Enkripsi merupakan fungsi dua arah sehingga string yang sudah di enkrispi dapat dibalikkan menjadi string semula dengan melakukan dekripsi. Tetapi untuk melakukan dekripsi dibutuhkan key.
+ - Hashing merupakan fungsi satu arah sehingga string semula tidak dapat dipulihkan
+ Menurut saya, penyimpanan password lebih baik menggunakan Hashing dikarenakan jika menggunakan enkripsi dan peretas dapat menemukan key pada basis data kita untuk melakukan dekripsi, peretas dapat memperoleh kata sandi asli dengan menggunakan key yang didapatkannya. 
+ 
+4. Jelaskan secara singkat apa itu UUID beserta penggunaannya!\
+ **Jawab**\
+UUID merupakan singkatan dari Universally Unique Identifier yang merupakan sebuah kombinasi 32 karakter yang dibuat secara acak dengan teknik kusus yang dijamin unik untuk setiap data. Dikarenakan dijamin unik maka UUID sangat cocok untuk dijadikan Primary Key. Penggunaan pada Spring Boot yaitu menambahkan @ sebelum membuat model pada sebuah attribute. @ yang digunakan adalah @GeneratedValue(generator="system-uuid") dan @GenericGenerator(name="system-uuid", strategy = "uuid") dan biasanya uuid digunakan pada attribute id pada model.
+
+5. Apa kegunaan class UserDetailsServiceImpl.java? Mengapa harus ada class tersebut?\
+ **Jawab**\
+Class UserDetailsServiceImpl digunakan untuk mencari username apakah username tersebut terdapat pada database. Pada Class ini juga terdapat method untuk menyimpan username, password, dan granted authorities yang berisi role dari user tersebut. Lalu, username, password, dan role tersebut disimpan pada User pada UserDetails bawaan Spring boot yang di import dari org.springframework.security.core.userdetails.User sehingga membantu proses otentikasi pengguna.
+
+### What I did not understand
+Pada tutorial ini saya tidak mengerti tentang details dari UserDetail, apakah UserDetails itu merupakan model User bawaan dari Springboot atau bagaimana?.
+
 ## Tutorial 5
 ### What I have learned today
 Pada Tutorial 5 saya belajar tentang bagaimana menggunakan rest API pada Spring boot dan membuat mock server. Selain itu, saya juga belajar tentang penggunaan Postman.
