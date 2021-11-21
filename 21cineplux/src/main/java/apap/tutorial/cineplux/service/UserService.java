@@ -13,4 +13,5 @@ public interface UserService {
     UserModel getUserById(String Id);
     String getUserRole(Authentication auth);
     Boolean comparePassword(String password,String encryptPassword);
+    Boolean compareEmail(String email);
 }

@@ -31,6 +31,7 @@ public class UserController {
             List<RoleModel> listRole = roleService.getListRole();
             model.addAttribute("user", user);
             model.addAttribute("listRole", listRole);
+            model.addAttribute("emailSama", false);
             return "form-add-user";
         } else {
             model.addAttribute("penjaga", false);
@@ -41,9 +42,22 @@ public class UserController {
 
     @PostMapping(value="/addUser")
     private String addUserSubmit(@ModelAttribute UserModel user, Model model){
-        userService.addUser(user);
-        model.addAttribute("user", user);
-        return "redirect:/";
+        Boolean cek = userService.compareEmail(user.getEmail());
+        if (cek == true){
+            model.addAttribute("emailSama", true);
+            List<RoleModel> listRole = roleService.getListRole();
+            model.addAttribute("listRole", listRole);
+            model.addAttribute("user", user);
+            return "form-add-user";
+
+        } else {
+            userService.addUser(user);
+            model.addAttribute("user", user);
+            return "redirect:/";
+        }
+
+
+
     }
 
     @GetMapping(value="/list-user")

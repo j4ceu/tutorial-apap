@@ -38,6 +38,16 @@ public class UserServiceImpl implements UserService{
         return compare;
     }
 
+    @Override
+    public Boolean compareEmail(String email){
+        Optional<UserModel> user = userDB.findByEmail(email);
+        if(user.isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
     @Override
