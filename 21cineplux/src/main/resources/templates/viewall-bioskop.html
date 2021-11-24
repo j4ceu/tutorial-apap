@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>21 Cineplux</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <h2>Daftar Seluruh Bioskop</h2>
+    <br>
+    <div class="col table-responsive" th:if="*{listBioskop.size() != 0}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>No Bioskop</th>
+                    <th>Nama Bioskop</th>
+                    <th>Alamat Bioskop</th>
+                    <th>Jumlah Studio</th>
+                    <th>Waktu Buka</th>
+                    <th>Waktu Tutup</th>
+                    <th>Lihat</th>
+                    <th>Ubah</th>
+                    <th>Hapus</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="bioskop, iterationStatus : ${listBioskop}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${bioskop.noBioskop}"></td>
+                    <td th:text="${bioskop.namaBioskop}"></td>
+                    <td th:text="${bioskop.alamatBioskop}">n</td>
+                    <td th:text="${bioskop.jumlahStudio}"></td>
+                    <td th:text="${bioskop.waktuBuka}"></td>
+                    <td th:text="${bioskop.waktuTutup}"></td>
+                    <td>
+                        <a class="btn btn-outline-warning" th:href="@{/bioskop/view(noBioskop=${bioskop.noBioskop})}">Detail</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-primary" th:href="@{/bioskop/update/} + ${bioskop.noBioskop}">Update</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-danger " th:href="@{/bioskop/delete/} + ${bioskop.noBioskop}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+    <div th:unless="*{listBioskop.size() != 0}">
+        <h2 th:text="'Tidak Ada Bioskop'"></h2>
+    </div>
+    <a class="btn btn-primary" href="/">Home</a>
+</div>
+</body>
+<style>
+    .table td {
+        text-align: center;
+    }
+    .table th {
+        text-align: center;
+        background-color: #ffc107;
+        color : white;
+    }
+</style>
+</html>
