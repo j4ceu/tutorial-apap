@@ -96,6 +96,11 @@ public class PenjagaRestController {
 
     }
 
+    @GetMapping(value="penjaga/find/{jenisKelamin}")
+    private List<PenjagaModel> getPenjagaByJenisKelamin(@PathVariable("jenisKelamin") Integer jenisKelamin) {
+        return penjagaRestService.retrievePenjagaListByJenisKelamin(jenisKelamin);
+    }
+
 
 
 
