@@ -65,6 +65,19 @@ function App() {
 
     }
 
+    function handleDeleteAll(item){
+        
+        var hargaAkhir = balance
+        cartItems.forEach(e => {
+            hargaAkhir = hargaAkhir + e.price ;
+            e.inCart = false;
+            updateShopItem(e,false);
+        })
+        setBalance(hargaAkhir)
+        setCartItems([])
+
+    }
+
     return (
         <div className="container-fluid">
             <h1 className="text-center mt-3 mb-0">Mini Commerce</h1>
@@ -87,6 +100,7 @@ function App() {
                 <div className="row mt-3">
                     {!cartHidden ? (
                         <div className="col-sm">
+                            <button type="button" class="btn btn-primary" onClick={handleDeleteAll}>Delete All</button>
                             <List
                                 title="My Cart"
                                 items={cartItems}

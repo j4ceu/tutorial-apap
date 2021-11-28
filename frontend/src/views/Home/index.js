@@ -21,6 +21,7 @@ export default class Home extends React.Component {
     handleAddItemToCart = (item) => {
         const newItems = [...this.state.cartItems]
         const newItem = {...item};
+        console.log(newItem)
         const myBalance = this.state.balance;
         const hargaItem = newItem.price;
         if (myBalance >= hargaItem) {
