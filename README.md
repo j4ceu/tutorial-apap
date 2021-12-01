@@ -2,6 +2,56 @@
 ## Authors
 Sutan Raihan Maulaya - 1906305820 - C
 
+## Tutorial 7
+### What I have learned today
+Pada Tutorial 6 saya belajar tentang bagaimana menggunakan React untuk frontend. Pada React tersebut saya juga belajar bagaimana membuat react class-based dan function-based.
+
+### Pertanyaan
+1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot
+sebagai ilustrasi dari apa yang Anda jelaskan.\
+**Jawab**\
+**Latihan 1**\
+Pada latihan 1 saya membuat suatu fungsi baru untuk onClick pada icon Delete yang bernama handleDeleteItemFromCart. Fungsi tersebut akan menghapus item yang sudah masuk ke dalam cart.
+Gambar dibawah merupakan fungsi yang saya buat untuk function-based\
+![image](https://user-images.githubusercontent.com/71779362/143258474-1ea2c2a3-23bb-418f-a5df-441604cdbcfb.png)\
+Gambar dibawah merupakan fungsi yang saya buat untuk class-based\
+![image](https://user-images.githubusercontent.com/71779362/143258732-4e4d1038-505b-4753-ac75-54569bcc497b.png)\
+
+**Latihan 2**\
+Pada latihan 2 saya disuruh membuat balance berkurang sesuai dengan harga item dan jika item pada cart dihapus maka balance akan bertambah lagi. Saya menambahkan beberapa kode pada fungsi handleAddItemToCart dan handleDeleteItemFromCart. Saya menambahkan kode untuk melakukan setState pada balance yang tersedia. Jika menambahkan barang ke cart maka balance sekarang dikurangi dengan balance yang dipunya, sedangkan untuk menghapus item pada cart dilakukan sebaliknya.\
+![image](https://user-images.githubusercontent.com/71779362/143260194-e9fcad2c-bd5f-4381-97cc-b9722bf1b2ce.png)
+![image](https://user-images.githubusercontent.com/71779362/143268461-2b9a4d8b-50bd-411b-9cfb-ae07f1a022b1.png)
+\
+Pada gambar diatas saya melakukan pengurangan balance jika menambah barang ke cart, sedangkan gambar dibawah saya melakukan menambahkan kode penambahan balance jika menghapus cart.
+![image](https://user-images.githubusercontent.com/71779362/143268668-bd62bc02-c7e7-49e2-9de0-9ca3fd9ae251.png)
+![image](https://user-images.githubusercontent.com/71779362/143268707-c87dc6e9-9e4b-47a9-a193-5e70a0892a77.png)
+
+**Latihan 3**\
+Pada Latihan 3 jika balance kurang dari harga barang maka akan memunculkan alert. Saya menambahkan conditional pada fungsi add to cart yaitu mengecek apakah balance sekarang lebih besar sama dengan harga item
+![image](https://user-images.githubusercontent.com/71779362/143268967-136de8b7-c9ea-458d-ba9b-66689b03a9b6.png)
+
+
+2. Menurut pemahaman kamu selama pengerjaan tutorial ini, apa perbedaan antara state dan
+props?\
+  **Jawab**\
+ State merupakan data yang tersimpan dalam suatu component dan bersifat private, sehingga data tersebut tidak dapat diakses oleh componen lain. Sedangkan, props merupakan singkatan dari property. Value dari props dapat dipassing seperti atribut HTMl dan biasanya digunakan untuk melakukan komunikasi antar component. 
+  
+3. Menurut kamu, apakah sebaiknya kita menggunakan component (e.g. List, Item) dalam
+React? sebutkan alasannya.\
+ **Jawab**\
+ Menurut saya sebaiknya kita menggunakan component sehingga dapat mempermudah untuk membaca kodingan. Selain itu, dengan menggunakan component kita dapat menggunakan kode tersebut pada component lain dan jika ada perubahan kodingan, kita hanya mengubah kode dari komponent tersebut tidak harus mengubah kode keseluruhan.
+ 
+4. Apa perbedaan class component dan functional component?\
+ **Jawab**\
+Pada tutorial ini terlihat bahwa jika menggunakan functional component maka stateless dan jika menggunakan class component maka stateful. Yang berarti pada class component memiliki state pada komponent tersebu, sedangkan functional component tidak memakai state pada komponen tersebut.
+
+5. Dalam react, apakah perbedaan component dan element?\
+ **Jawab**\
+React element adalah objek yang merepresentasikan DOM yang terdiri dari element-element HTML seperti div dan pada react memanfaatkan satu elemen pada file index.html root yang disebut dengan 'root' DOM. Semua elemen di dalam root DOM tersebut akan di-manage oleh React DOM. Sedangkan react component seperti function pada javascript dan menerima input yang disebut props dan akan mereturn React element. 
+
+### What I did not understand
+Pada tutorial ini saya tidak mengerti tentang details dari UserDetail, apakah UserDetails itu merupakan model User bawaan dari Springboot atau bagaimana?.
+
 ## Tutorial 6
 ### What I have learned today
 Pada Tutorial 6 saya belajar tentang Security pada Springboot dan bagaimana membuat fitur Login dan Logout. Selain itu, saya belajar tentang bagaimana membuat user ke database dan cara melakukan encrypt pada sebuah data atau string.
