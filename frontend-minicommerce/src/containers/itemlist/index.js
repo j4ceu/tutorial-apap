@@ -4,21 +4,29 @@ import classes from "./styles.module.css";
 import APIConfig from "../../api/APIConfig"
 import Button from "../../components/button";
 import Modal from "../../components/modal";
+import Search from "../../components/search";
+import { Badge } from '@mui/material';
+import Fab from '@mui/material/Fab';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ViewStreamIcon from '@mui/icons-material/ViewStream';
+import { Link } from "react-router-dom";
 
 class ItemList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			items: [],
+			carts: [],
+			cartHidden: true,
 			isLoading: false,
 			isCreate: false,
 			isEdit: false,
 			id: "",
 			title: "",
-			price: 0,
+			price: "",
 			description: "",
 			category: "",
-			quantity: 0,
+			quantity: "",
 		};
 		this.handleClickLoading = this.handleClickLoading.bind(this);
 		this.handleAddItem = this.handleAddItem.bind(this);
@@ -27,11 +35,14 @@ class ItemList extends Component {
 		this.handleEditItem = this.handleEditItem.bind(this);
 		this.handleSubmitEditItem = this.handleSubmitEditItem.bind(this);
 		this.handleSubmitItem = this.handleSubmitItem.bind(this);
+		this.handleSearch = this.handleSearch.bind(this);
+		this.handleAddToCart = this.handleAddToCart.bind(this);
 	}
 
 
 	componentDidMount() {
 		this.loadData();
+		this.loadDataCart();
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -56,10 +67,10 @@ class ItemList extends Component {
 			isEdit: false,
 			id: "",
 			title: "",
-			price: 0,
+			price: "",
 			description: "",
 			category: "",
-			quantity: 0
+			quantity: ""
 		})
 	}
 
@@ -71,6 +82,29 @@ class ItemList extends Component {
 	async loadData() {
 		try {
 			const { data } = await APIConfig.get("/item");
+			this.setState({ items: data.result });
+			console.log(data.result)
+		} catch (error) {
+			alert("Oops terjadi masalah pada server");
+			console.log(error);
+		}
+	}
+
+	async loadDataCart() {
+		try {
+			const { data } = await APIConfig.get("/cart");
+			this.setState({ carts: data.result });
+			console.log(data.result)
+		} catch (error) {
+			alert("Oops terjadi masalah pada server");
+			console.log(error);
+		}
+	}
+
+	async handleSearch() {
+		const value = document.getElementById("search")
+		try {
+			const { data } = await APIConfig.get(`/item?title=${value.value}`);
 			this.setState({ items: data.result });
 		} catch (error) {
 			alert("Oops terjadi masalah pada server");
@@ -146,25 +180,72 @@ class ItemList extends Component {
 		this.handleCancel(event);
 	}
 
+	async handleAddToCart(item) {
+		try {
+			const qty = document.getElementById("cartQty" + item.id)
+			if (qty.value != "") { 
+			const cartList = [...this.state.carts]
+			const data = {
+				idItem: item.id,
+				quantity: qty.value
+			}
+			const targetInd = cartList.findIndex((it) => it.item.id === item.id);
+			console.log(qty.value)
+			if (targetInd >= 0) {
+				if (qty.value <= item.quantity - cartList[targetInd].quantity) {
+					await APIConfig.post("/cart", data);
+					this.loadDataCart();
+					alert("Item berhasil ditambahkan pada Cart")
+				} else {
+					alert("Stok Tidak Memenuhi");
+				}
+			} else {
+				if (qty.value <= item.quantity) {
+					await APIConfig.post("/cart", data);
+					this.loadDataCart();
+					alert("Item berhasil ditambahkan pada Cart")
+				} else {
+					alert("Stok Tidak Memenuhi");
+				}
+
+			}
+		} else {
+			alert("Silahkan isi kuantitas terlebih dahulu!");
+		}
+
+		} catch (error) {
+			alert("Oops terjadi masalah pada server");
+			console.log(error);
+		}
+
+
+	}
+
 	render() {
-		console.log("render()");
 		return (
 			<div className={classes.itemList}>
+				<div style={{ position: 'fixed', top: 25, right: 25 }}>
+					<Link to="/cart-item"><Fab variant="extended">
+						{this.state.cartHidden ?
+							<Badge color="secondary" badgeContent={this.state.carts.length}>
+								<ShoppingCartIcon />
+							</Badge>
+							: <ViewStreamIcon />
+						}
+					</Fab></Link>
+				</div>
 				<h1 className={classes.title}>All Items</h1>
-				<Button action={this.handleAddItem}>
+				<Button action={this.handleAddItem} className="btn btn-outline-primary">
 					Add Item
 				</Button>
+				<Search action={this.handleSearch}></Search>
 				<div>
 					{this.state.items.map((item) => (
 						<Item
-							key={item.id}
-							id={item.id}
-							title={item.title}
-							price={item.price}
-							description={item.description}
-							category={item.category}
-							quantity={item.quantity}
+							item={item}
+							cart={false}
 							handleEdit={() => this.handleEditItem(item)}
+							handleAddToCart={() => this.handleAddToCart(item)}
 						/>
 					))}
 				</div>
@@ -185,7 +266,7 @@ class ItemList extends Component {
 							type="number"
 							placeholder="Harga"
 							name="price"
-							value={this.state.price === 0 ? "" : this.state.price}
+							value={this.state.price}
 							onChange={this.handleChangeField}></input>
 
 						<textarea className={classes.textField}
@@ -207,15 +288,17 @@ class ItemList extends Component {
 							placeholder="qty"
 							name="quantity"
 							onChange={this.handleChangeField}
-							value={this.state.quantity === 0 ? "" : this.state.quantity}></input>
+							value={this.state.quantity}></input>
 
 						<Button action={this.state.isCreate
 							? this.handleSubmitItem
-							: this.handleSubmitEditItem}
+							: this.handleSubmitEditItem} className="btn btn-outline-primary"
 						>
-							Create
+							{this.state.isCreate
+								? "Create"
+								: "Update"}
 						</Button>
-						<Button action={this.handleCancel}>Cancel</Button>
+						<Button action={this.handleCancel} className="btn btn-outline-danger">Cancel</Button>
 					</form>
 				</Modal>
 			</div>

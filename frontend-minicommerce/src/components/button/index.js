@@ -2,10 +2,10 @@ import React from "react";
 import classes from "./styles.module.css";
 
 const Button = (props) =>{
-	const {action, children} = props;
+	const {action, children, style, className} = props;
 
 	return (
-		<button className={classes.button} onClick={action}>{children}</button>
+		<button className={className} onClick={action} style={style}>{children}</button>
 	);
 }
 
