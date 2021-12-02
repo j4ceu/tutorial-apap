@@ -41,7 +41,7 @@ class CartList extends Component {
 	async loadData() {
 		try {
 			const { data } = await APIConfig.get("/cart");
-			this.setState({ carts: data.result});
+			this.setState({ carts: data.result });
 			console.log(data.result)
 		} catch (error) {
 			alert("Oops terjadi masalah pada server");
@@ -50,10 +50,10 @@ class CartList extends Component {
 	}
 
 	async handleCheckout() {
-		try{
+		try {
 			await APIConfig.get("/cart/checkout");
 			this.setState({
-				carts:[]
+				carts: []
 			})
 			this.loadData();
 			alert("Checkout berhasil dilakukan")
@@ -61,7 +61,7 @@ class CartList extends Component {
 			alert("Oops terjadi masalah pada server");
 			console.log(error);
 		}
-		
+
 	}
 
 
@@ -81,16 +81,16 @@ class CartList extends Component {
 				</div>
 				<h1 className={classes.title}>Cart Items</h1>
 				{this.state.carts.length === 0 ? "" :
-				<Button action={this.handleCheckout} className="btn btn-outline-primary">
-					Checkout
-				</Button>}
+					<Button action={this.handleCheckout} className="btn btn-outline-primary">
+						Checkout
+					</Button>}
 				<div>
 					{this.state.carts.map((cart) => (
 						<Item
 							item={cart.item}
-							quantityCart = {cart.quantity}
+							quantityCart={cart.quantity}
 							cart={true}
-							totalHarga={cart.item.price * cart.quantity }
+							totalHarga={cart.item.price * cart.quantity}
 						/>
 					))}
 				</div>

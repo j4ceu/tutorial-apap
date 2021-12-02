@@ -183,35 +183,35 @@ class ItemList extends Component {
 	async handleAddToCart(item) {
 		try {
 			const qty = document.getElementById("cartQty" + item.id)
-			if (qty.value != "") { 
-			const cartList = [...this.state.carts]
-			const data = {
-				idItem: item.id,
-				quantity: qty.value
-			}
-			const targetInd = cartList.findIndex((it) => it.item.id === item.id);
-			console.log(qty.value)
-			if (targetInd >= 0) {
-				if (qty.value <= item.quantity - cartList[targetInd].quantity) {
-					await APIConfig.post("/cart", data);
-					this.loadDataCart();
-					alert("Item berhasil ditambahkan pada Cart")
+			if (qty.value != "") {
+				const cartList = [...this.state.carts]
+				const data = {
+					idItem: item.id,
+					quantity: qty.value
+				}
+				const targetInd = cartList.findIndex((it) => it.item.id === item.id);
+				console.log(qty.value)
+				if (targetInd >= 0) {
+					if (qty.value <= item.quantity - cartList[targetInd].quantity) {
+						await APIConfig.post("/cart", data);
+						this.loadDataCart();
+						alert("Item berhasil ditambahkan pada Cart")
+					} else {
+						alert("Stok Tidak Memenuhi");
+					}
 				} else {
-					alert("Stok Tidak Memenuhi");
+					if (qty.value <= item.quantity) {
+						await APIConfig.post("/cart", data);
+						this.loadDataCart();
+						alert("Item berhasil ditambahkan pada Cart")
+					} else {
+						alert("Stok Tidak Memenuhi");
+					}
+
 				}
 			} else {
-				if (qty.value <= item.quantity) {
-					await APIConfig.post("/cart", data);
-					this.loadDataCart();
-					alert("Item berhasil ditambahkan pada Cart")
-				} else {
-					alert("Stok Tidak Memenuhi");
-				}
-
+				alert("Silahkan isi kuantitas terlebih dahulu!");
 			}
-		} else {
-			alert("Silahkan isi kuantitas terlebih dahulu!");
-		}
 
 		} catch (error) {
 			alert("Oops terjadi masalah pada server");

@@ -28,7 +28,7 @@ const Item = (props) => {
 			{cart ?
 				"" : <div style={{ display: 'flex' }}>
 					<div>
-						<MDBInput hint="Qty" type="text" containerClass="active-pink active-pink-2 mt-0 mb-3" id={`cartQty${id}`} required />
+						<MDBInput hint="Qty" type="number" containerClass="active-pink active-pink-2 mt-0 mb-3" id={`cartQty${id}`} required />
 					</div>
 					<div>
 						<Button style={{ padding: ".50rem .50rem" }} action={handleAddToCart} className="btn btn-outline-info">
