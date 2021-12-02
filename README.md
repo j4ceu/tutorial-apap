@@ -1,10 +1,45 @@
 # Tutorial APAP
 ## Authors
 Sutan Raihan Maulaya - 1906305820 - C
+## Tutorial 8
+### What I have learned today
+Pada Tutorial 8 saya belajar tentang bagaimana menggunakan React dan menghubungkan dengan backend Springboot.
+
+### Pertanyaan
+1. Ceritakan langkah - langkah yang kalian lakukan untuk solve LATIHAN no.1, dan mengapa kalian
+melakukan langkah - langkah tersebut?\
+**Jawab**\
+Pada latihan nomor 1 form masih berisi value dari item sebelumnya, cara saya menghandlenya saya melakukan setState pada setiap handleSubmit dan handleCancel untuk melakukan state atribut dari item kembali seperti default, sehingga ketika membuka modal kembali fieldnya sudah kosong.
+
+2. Jelaskan fungsi dari async dan await!\
+  **Jawab**\
+ Async dan await merupakan salah satu cara menangani asynchronus selain menggunakan callback dan promise. Async merupakan fungsi yang mengembalikan sebuah promise, sedangkan Await bertujuan untuk menunda jalannya Async hingga proses dari Await tersebut berhasil dieksekusi. Await hanya bisa digunakan pada fungsi yang menggunakan Async.
+  
+3. Masukkan jawaban dari Screenshot yang diperintahkan di halaman 9 pada Component Lifecycle
+pada pertanyaan ini.\
+ **Jawab**\
+![1](https://user-images.githubusercontent.com/71779362/144398025-99d5ffa8-94aa-4f79-b261-3f0b6aa76364.png)
+![1b](https://user-images.githubusercontent.com/71779362/144398031-9284fe53-6bb1-4ece-833a-ba79f7c479f3.png)
+![2](https://user-images.githubusercontent.com/71779362/144398042-edb32188-f5b7-444a-8506-8913456b7b65.png)
+![3](https://user-images.githubusercontent.com/71779362/144398050-8d7fda8e-09a3-4bfc-9493-e24966c8b375.png)
+![6](https://user-images.githubusercontent.com/71779362/144398056-9b57fc63-dd13-46d9-9959-f490597471af.png)
+![7](https://user-images.githubusercontent.com/71779362/144398066-b5d3b160-5475-4c1d-8d73-e9c852ba7001.png)
+![8](https://user-images.githubusercontent.com/71779362/144398076-161c9344-504e-4d43-813e-44651d1937b1.png)
+![9](https://user-images.githubusercontent.com/71779362/144398087-22037f94-ae6f-48ff-84d8-48367c0625ea.png)
+
+ 
+4. Jelaskan fungsi dari componentDidMount, shouldComponentUpdate, componentDidUpdate, componentWillReceiveProps, componentWillUnmount. Notes : Penjelasan harus mencantumkan “kapan fungsi dipanggil” dan “use case apa saja yang biasanya menggunakan lifecycle method tersebut”.\
+ **Jawab**
+- componentDidMount = fase siklus hidup React ketika pertama kali merender DOM dan pada saat ini dapat melakukan operasi sebelum elemen UI/JSX dimuat. Fungsi dipanggil ketika merender DOM dan use case yang biasa digunakan pada tutorial ini yaitu melakukan pemanggilan API sebelum elemen UI/JSX dimuat sehingga setelah elemen UI/JSX dimuat sudah terdapat data yang dipanggil dari API.
+- shouldComponentUpdate = fungsi ini dipanggil sebelum proses render ketika component di update dan akan mereturn boolean. render() tidak akan dipanggil jika shouldComponentUpdate mereturn nilai false. Use casenya adalah ketika kita ingin mengetahui perubahan yang terjadi pada props/state pada component tersebut.
+- componentDidUpdate =  componentDidUpdate dipanggil setelah fungsi render. Serupa dengan componentDidMount, fungsi ini dapat digunakan untuk melakukan operasi DOM setelah data telah diperbaharui. Use case pada fungsi ini digunakan jika kita ingin melakukan sebuah fungsi ketika suatu component di update atau suatu state/props berubah, seperti memunculkan button jika terdapat tambahan state.
+- componentWillReceiveProps = fungsi ini dipanggil sebelum komponen yang dipasang menerima props baru. Jika Anda perlu untuk memperbarui state sebagai reaksi atas perubahan prop (misalnya untuk me-reset-nya). Use case pada fungsi ini jika kita ingin membandingkan this.props dam nextProps serta melakukan transisi state menggunakan this.setState() dalam metode ini.
+- componentWillUnmount = fungsi ini dipanggil langsung sebelum komponen dilepas dan dihancurkan. Use case pada fungsi ini digunakan jika kita ingin melakukan penghapusan timer yang ada pada component.
+
 
 ## Tutorial 7
 ### What I have learned today
-Pada Tutorial 6 saya belajar tentang bagaimana menggunakan React untuk frontend. Pada React tersebut saya juga belajar bagaimana membuat react class-based dan function-based.
+Pada Tutorial 7 saya belajar tentang bagaimana menggunakan React untuk frontend. Pada React tersebut saya juga belajar bagaimana membuat react class-based dan function-based.
 
 ### Pertanyaan
 1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot
@@ -49,8 +84,6 @@ Pada tutorial ini terlihat bahwa jika menggunakan functional component maka stat
  **Jawab**\
 React element adalah objek yang merepresentasikan DOM yang terdiri dari element-element HTML seperti div dan pada react memanfaatkan satu elemen pada file index.html root yang disebut dengan 'root' DOM. Semua elemen di dalam root DOM tersebut akan di-manage oleh React DOM. Sedangkan react component seperti function pada javascript dan menerima input yang disebut props dan akan mereturn React element. 
 
-### What I did not understand
-Pada tutorial ini saya tidak mengerti tentang details dari UserDetail, apakah UserDetails itu merupakan model User bawaan dari Springboot atau bagaimana?.
 
 ## Tutorial 6
 ### What I have learned today
